@@ -674,10 +674,10 @@ const definition = {
                                 break;
                             case MqttPreset.Boost:
                                 (0, assert_1.default)(meta.state.boost_duration !== undefined && meta.state.boost_duration > 0, 'Boost duration (boost_duration) must be configured and > 0');
-                                //if (currentBoostDurationSet === 0) {
-                                //     result.state.setpoint_after_boost = meta.state.current_heating_setpoint;
-                                //     console.log(`TRV602Z(tz): Storing setpoint ${result.state.setpoint_after_boost} before activating Boost.`);
-                                //}
+                                if (currentBoostDurationSet === 0) {
+                                     result.state.setpoint_after_boost = meta.state.current_heating_setpoint;
+                                     console.log(`TRV602Z(tz): Storing setpoint ${result.state.setpoint_after_boost} before activating Boost.`);
+                                }
                                 const boostDurationMinutes = meta.state.boost_duration;
                                 console.log(`TRV602Z(tz): Activating Boost for ${boostDurationMinutes} minutes (DP ${boostDurationSetDP}=${boostDurationMinutes}).`);
                                 await tuya.sendDataPointEnum(entity, deviceModeDP, TuyaDeviceMode.Auto);
